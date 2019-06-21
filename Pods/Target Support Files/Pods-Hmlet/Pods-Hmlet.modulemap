@@ -1,0 +1,6 @@
+module Pods_Hmlet {
+  umbrella header "Pods-Hmlet-umbrella.h"
+
+  export *
+  module * { export * }
+}

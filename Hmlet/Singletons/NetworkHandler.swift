@@ -30,10 +30,7 @@ class NetworkHandler:NSObject {
     
     //_ completion: @escaping (Movie) -> Void
     
-    static func getMovies() {
-        
-        
-        
+    static func getMovies(completion: @escaping ([Movie]) -> Void) {
         
         Alamofire.request(apiToContact + "categories/", headers: headers).validate().responseJSON(){ response in
             
@@ -41,10 +38,14 @@ class NetworkHandler:NSObject {
             case .success:
                 if let value = response.result.value {
                     let json = JSON(value)
+                    guard let results = json["results"].array else { return }
+                    var movies = [Movie]()
                     
-                    let results = Movie.init(json: json)
+                    for i in 0..<results.count {
+                        movies.append(Movie.init(json: results[i]))
+                    }
                     
-                    completion(results)
+                    completion(movies)
                 }
             case .failure(let error):
                 print(error)

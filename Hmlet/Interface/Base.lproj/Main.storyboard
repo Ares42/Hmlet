@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="50" width="414" height="666"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="140" id="x5a-4h-8YX">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="140" id="x5a-4h-8YX" customClass="MovieCell" customModule="Hmlet" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="140"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x5a-4h-8YX" id="cJn-EW-X4k">
@@ -72,6 +72,11 @@
                                                         <constraint firstAttribute="bottom" secondItem="ZjZ-iO-pjN" secondAttribute="bottom" constant="8" id="tMj-u7-krw"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="imageView" destination="ZjZ-iO-pjN" id="ftW-ad-pIB"/>
+                                                    <outlet property="movieTitleLabel" destination="pNJ-pn-b86" id="pVO-v6-VBP"/>
+                                                    <outlet property="ratingLabel" destination="CnE-i0-x4f" id="6Pp-f8-htV"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>

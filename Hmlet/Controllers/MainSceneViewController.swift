@@ -37,7 +37,9 @@ class MainSceneViewController:UIViewController {
             guard let self = self else {
                 return
             }
-            self.movieArray = NetworkHandler.getMovies()
+            if let safeMovies = NetworkHandler.getMovies(completion: ([Movie]) -> Void) {
+                self.movieArray = safeMovies
+            }
             
 
             DispatchQueue.main.async { [weak self] in
@@ -54,11 +56,11 @@ class MainSceneViewController:UIViewController {
 
 extension MainSceneViewController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: <#T##IndexPath#>)
     }
     
     

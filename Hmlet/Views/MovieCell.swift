@@ -11,13 +11,21 @@ import UIKit
 
 class MovieCell:UITableViewCell {
     
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var posterView: UIImageView!
     
     @IBOutlet var movieTitleLabel: UILabel!
     
     @IBOutlet var yearLabel: UILabel!
     
+    @IBOutlet weak var ratingImageView: UIImageView!
+    
     @IBOutlet var ratingLabel: UILabel!
+    
+    
+    override func awakeFromNib() {
+        
+    }
+    
     
     
 }

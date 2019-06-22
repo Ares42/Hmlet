@@ -53,8 +53,31 @@ class NetworkHandler:NSObject {
         }
     }
     
-    
-    
+    static func getSearch(_ searchString:String, completion: @escaping ([Movie]) -> Void) {
+        
+        Alamofire.request( "\(apiToContact)/search/\(searchString)", headers: headers).validate().responseJSON() { response in
+            
+            switch response.result {
+            case .success:
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    var responseArray = [Movie]()
+                    
+                    if let results = json["events"]["results"].array {
+                        for i in 0..<results.count {
+                            let event = Movie.init(json: results[i])
+                            responseArray.append(event)
+                        }
+                    }
+                    
+                    completion(responseArray)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
     
     
     

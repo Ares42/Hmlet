@@ -12,6 +12,7 @@ import UIKit
 class MainSceneViewController:UIViewController {
 
     //MARK: - IBOutlets
+    @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - Variables
@@ -31,23 +32,17 @@ class MainSceneViewController:UIViewController {
     
     
     //MARK: - Data Handler
-    func requestMovies() {
-        
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let self = self else {
-                return
-            }
-            if let safeMovies = NetworkHandler.getMovies(completion: ([Movie]) -> Void) {
-                self.movieArray = safeMovies
-            }
+    func updateTableView() {
+        if let text = self.searchField.text {
+            guard let searchBarEncodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlHostAllowed) else { return }
             
-
-            DispatchQueue.main.async { [weak self] in
-                self?.tableView.reloadData()
-            }
+            NetworkHandler.getSearch(searchBarEncodedText, completion: { (responseArray) -> Void in
+                self.movieArray = responseArray
+//                self.activityIndicator.isHidden = true
+//                self.activityIndicator.stopAnimating()
+                self.tableView.reloadData()
+            })
         }
-        
-
     }
     
     
@@ -60,7 +55,11 @@ extension MainSceneViewController:UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: <#T##IndexPath#>)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as! MovieCell
+        
+        
+        
+        return cell
     }
     
     

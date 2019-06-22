@@ -25,40 +25,80 @@
                                         <rect key="frame" x="0.0" y="50" width="414" height="666"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="140" id="x5a-4h-8YX" customClass="MovieCell" customModule="Hmlet" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="140"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="200" id="x5a-4h-8YX" customClass="MovieCell" customModule="Hmlet" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="414" height="200"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x5a-4h-8YX" id="cJn-EW-X4k">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="139.66666666666666"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="199.66666666666666"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZjZ-iO-pjN">
-                                                            <rect key="frame" x="20" y="8.0000000000000071" width="79.666666666666671" height="123.66666666666669"/>
+                                                            <rect key="frame" x="8" y="8" width="118" height="183.66666666666666"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="ZjZ-iO-pjN" secondAttribute="height" multiplier="9:14" id="CeE-Zm-VAc"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="aUw-cI-gkF">
-                                                            <rect key="frame" x="107.66666666666666" y="8.0000000000000071" width="298.33333333333337" height="123.66666666666669"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aUw-cI-gkF">
+                                                            <rect key="frame" x="134" y="8" width="272" height="183.66666666666666"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNJ-pn-b86">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="298.33333333333331" height="51"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sF4-Fr-oYh">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uv9-w9-kuX">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="196" height="50"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Captain Marvel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNJ-pn-b86">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="196" height="50"/>
+                                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="muV-gr-gh8">
+                                                                            <rect key="frame" x="204" y="10" width="30" height="30"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="30" id="8rs-zF-JV7"/>
+                                                                                <constraint firstAttribute="width" constant="30" id="UJA-bs-gdF"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CnE-i0-x4f">
+                                                                            <rect key="frame" x="242" y="0.0" width="30" height="50"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="30" id="GCl-yd-XXh"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="trailing" secondItem="CnE-i0-x4f" secondAttribute="trailing" id="6bg-Hb-OFG"/>
+                                                                        <constraint firstItem="CnE-i0-x4f" firstAttribute="leading" secondItem="muV-gr-gh8" secondAttribute="trailing" constant="8" id="9ea-zp-YY4"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="uv9-w9-kuX" secondAttribute="bottom" id="Tsy-pg-qbR"/>
+                                                                        <constraint firstAttribute="height" constant="40" id="Xwe-9z-2zT"/>
+                                                                        <constraint firstItem="uv9-w9-kuX" firstAttribute="top" secondItem="sF4-Fr-oYh" secondAttribute="top" id="obD-ZU-6LN"/>
+                                                                        <constraint firstItem="muV-gr-gh8" firstAttribute="leading" secondItem="uv9-w9-kuX" secondAttribute="trailing" constant="8" id="uGP-Cn-tYc"/>
+                                                                        <constraint firstItem="muV-gr-gh8" firstAttribute="centerY" secondItem="CnE-i0-x4f" secondAttribute="centerY" id="uzj-ef-QYc"/>
+                                                                        <constraint firstItem="CnE-i0-x4f" firstAttribute="top" secondItem="sF4-Fr-oYh" secondAttribute="top" id="yf7-C6-TvB"/>
+                                                                        <constraint firstItem="uv9-w9-kuX" firstAttribute="leading" secondItem="sF4-Fr-oYh" secondAttribute="leading" id="zSE-NU-giy"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="CnE-i0-x4f" secondAttribute="bottom" id="zhP-mZ-yNd"/>
+                                                                    </constraints>
+                                                                </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAC-rj-gVe">
-                                                                    <rect key="frame" x="0.0" y="51" width="298.33333333333331" height="36.333333333333343"/>
+                                                                    <rect key="frame" x="0.0" y="58.000000000000007" width="272" height="20.333333333333336"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CnE-i0-x4f">
-                                                                    <rect key="frame" x="0.0" y="87.333333333333329" width="298.33333333333331" height="36.333333333333329"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="D57-OZ-NlV">
+                                                                    <rect key="frame" x="0.0" y="86.333333333333343" width="272" height="97.333333333333343"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <string key="text">The story follows Carol Danvers as she becomes one of the universe’s most powerful heroes when Earth is caught in the middle of a galactic war between two alien races. Set in the 1990s, Captain Marvel is an all-new adventure from a previously unseen period in the history of the Marvel Cinematic Universe.</string>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                </textView>
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
@@ -68,13 +108,14 @@
                                                         <constraint firstAttribute="trailing" secondItem="aUw-cI-gkF" secondAttribute="trailing" constant="8" id="ODC-A0-Jd3"/>
                                                         <constraint firstItem="ZjZ-iO-pjN" firstAttribute="top" secondItem="cJn-EW-X4k" secondAttribute="top" constant="8" id="dxy-Nm-UWf"/>
                                                         <constraint firstItem="aUw-cI-gkF" firstAttribute="top" secondItem="cJn-EW-X4k" secondAttribute="top" constant="8" id="g2S-RE-Nsn"/>
-                                                        <constraint firstItem="ZjZ-iO-pjN" firstAttribute="leading" secondItem="cJn-EW-X4k" secondAttribute="leading" constant="20" id="iY3-Mw-XD9"/>
+                                                        <constraint firstItem="ZjZ-iO-pjN" firstAttribute="leading" secondItem="cJn-EW-X4k" secondAttribute="leading" constant="8" id="iY3-Mw-XD9"/>
                                                         <constraint firstAttribute="bottom" secondItem="ZjZ-iO-pjN" secondAttribute="bottom" constant="8" id="tMj-u7-krw"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="imageView" destination="ZjZ-iO-pjN" id="ftW-ad-pIB"/>
                                                     <outlet property="movieTitleLabel" destination="pNJ-pn-b86" id="pVO-v6-VBP"/>
+                                                    <outlet property="posterView" destination="ZjZ-iO-pjN" id="zDY-cJ-eJs"/>
+                                                    <outlet property="ratingImageView" destination="muV-gr-gh8" id="isg-tE-dAg"/>
                                                     <outlet property="ratingLabel" destination="CnE-i0-x4f" id="6Pp-f8-htV"/>
                                                 </connections>
                                             </tableViewCell>
@@ -118,6 +159,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="searchField" destination="9Ro-QM-hjo" id="loy-VQ-kif"/>
                         <outlet property="tableView" destination="70L-zq-brY" id="HXg-wa-n9F"/>
                     </connections>
                 </viewController>

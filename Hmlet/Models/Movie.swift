@@ -12,14 +12,23 @@ import SwiftyJSON
 
 struct Movie {
     
+    var posterURL:NSURL
     var title:String
     var year:Int
+    var rating:Double
     
     
     init(json:JSON) {
-        self.title = json["text"]["name"].stringValue
-        self.year = json["text"]["year"].intValue
+        if let safeURL = NSURL.init(string: json["poster_path"].stringValue) {
+            self.posterURL = safeURL
+        } else {
+            print("poster fetch failure")
+            self.posterURL = NSURL.init()
+        }
         
+        self.title = json["title"].stringValue
+        self.year = json["release_date"].intValue
+        self.rating = json["vote_average"].doubleValue
     }
     
     

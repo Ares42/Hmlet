@@ -37,17 +37,11 @@ class MainSceneViewController:UIViewController {
     //MARK: - Data Handler
     func updateTableView() {
         if let text = self.searchField.text {
-            self.activityIndicator.startAnimating()
-            self.activityIndicator.isHidden = false
 
-            guard let searchBarEncodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlHostAllowed) else { return }
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.stopAnimating()
+            self.tableView.reloadData()
             
-            NetworkHandler.getSearch(searchBarEncodedText, completion: { (responseArray) -> Void in
-                self.movieArray = responseArray
-                self.activityIndicator.isHidden = true
-                self.activityIndicator.stopAnimating()
-                self.tableView.reloadData()
-            })
         }
     }
     
@@ -56,7 +50,19 @@ class MainSceneViewController:UIViewController {
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         
-        updateTableView()
+        if let safeSearchText = searchField.text,
+           let searchBarEncodedText = safeSearchText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlHostAllowed) {
+
+            NetworkHandler.getSearch(searchBarEncodedText, completion: { (responseArray) -> Void in
+                self.movieArray = responseArray
+                
+                let main = DispatchQueue.main
+
+                main.sync() {
+                    self.updateTableView()
+                }
+            })
+        }
     }
     
 }

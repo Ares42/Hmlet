@@ -8,11 +8,13 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 
-let apiToContact = "https://api.themoviedb.org/3/movie/550?api_key=\(APIKEY)"
-let APIKEY = "3aeab01116efcce4cd7a822e7a210768"
+let apiToContact = "https://api.themoviedb.org/3"
+let APIKEY = "?api_key=3aeab01116efcce4cd7a822e7a210768"
+
+let imageBasePath = "https://image.tmdb.org/t/p/w185"
+
 let headers: HTTPHeaders = [
     "Accept": "application/json",
     "x-listing-context": "website-config-id=237",
@@ -28,24 +30,29 @@ class NetworkHandler:NSObject {
         super.init()
     }
     
-    //_ completion: @escaping (Movie) -> Void
     
-    static func getMovies(completion: @escaping ([Movie]) -> Void) {
+    func constructRequest() {
+        // given a set of parameters, constructs an actual Get Request. Should this be abstracted later? probably. Let's see what we build and what we need.
+    }
+    
+    
+    static func getPopularMovies(completion: @escaping ([Movie]) -> Void) {
         
-        Alamofire.request(apiToContact + "categories/", headers: headers).validate().responseJSON(){ response in
-            
+        Alamofire.request("\(apiToContact)/movie/popular\(APIKEY)",
+                          method: .get
+            ).validate().responseJSON() { response in
+                            
             switch response.result {
             case .success:
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    guard let results = json["results"].array else { return }
-                    var movies = [Movie]()
-                    
-                    for i in 0..<results.count {
-                        movies.append(Movie.init(json: results[i]))
-                    }
-                    
-                    completion(movies)
+                guard let data = response.data else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .iso8601
+                    let moviesResponse = try decoder.decode(Response.self, from: data)
+                    print(moviesResponse)
+                    completion(moviesResponse.results)
+                } catch let jsonErr {
+                    print("Error serializing Json \(jsonErr)")
                 }
             case .failure(let error):
                 print(error)
@@ -53,24 +60,25 @@ class NetworkHandler:NSObject {
         }
     }
     
+
+    
     static func getSearch(_ searchString:String, completion: @escaping ([Movie]) -> Void) {
-        
-        Alamofire.request( "\(apiToContact)/search/\(searchString)", headers: headers).validate().responseJSON() { response in
-            
+
+        Alamofire.request( "\(apiToContact)/search/movie\(APIKEY)&query=\(searchString)",
+            method: .get
+            ).validate().responseJSON() { response in
+
             switch response.result {
             case .success:
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    var responseArray = [Movie]()
-                    
-                    if let results = json["events"]["results"].array {
-                        for i in 0..<results.count {
-                            let event = Movie.init(json: results[i])
-                            responseArray.append(event)
-                        }
-                    }
-                    
-                    completion(responseArray)
+                guard let data = response.data else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .iso8601
+                    let moviesResponse = try decoder.decode(Response.self, from: data)
+                    print(moviesResponse)
+                    completion(moviesResponse.results)
+                } catch let jsonErr {
+                    print("Error serializing Json \(jsonErr)")
                 }
             case .failure(let error):
                 print(error)
@@ -78,8 +86,38 @@ class NetworkHandler:NSObject {
         }
     }
 
+    func getSession() {
+        
+    }
+    
+    static func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
     
     
     
+}
+
+extension UIImageView {
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() {
+                self.image = image
+            }
+            }.resume()
+    }
     
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        let fullPath = "\(imageBasePath)\(link)"
+        
+        guard let url = URL(string: fullPath) else { return }
+        downloaded(from: url, contentMode: mode)
+    }
 }
